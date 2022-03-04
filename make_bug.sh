@@ -6,16 +6,6 @@ then
     exit 1
 fi
 
-if [[ "${#@}" == "2" ]] && [[ "$2" == "10" ]]
-then
-    function docker(){
-        docker.exe "$@"
-    }
-    function docker-compose(){
-        docker-compose.exe "$@"
-    }
-fi
-
 DOCKER_ADDRESS=$1
 RABBITMQ_UI=${DOCKER_ADDRESS}:15672
 
@@ -88,7 +78,7 @@ function wait_rabbitmq(){
 
 # Restarts RabbitMQ cluster 5 times
 function restart_rabbitmqs(){
-    local i=5
+    local i=1
     local c=0
     local rabbits=( "rabbitmq1" "rabbitmq2" "rabbitmq3" )
     while [[ "$i" != '0' ]]

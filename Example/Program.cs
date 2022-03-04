@@ -4,6 +4,8 @@ using MassTransit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Serilog.Events;
 using IHost = Microsoft.Extensions.Hosting.IHost;
 
 namespace Example
@@ -19,10 +21,17 @@ namespace Example
 
         public static IHost CreateHost()
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .Enrich.FromLogContext()
+                .WriteTo.Console()
+                .CreateLogger();
+
             return new HostBuilder()
                 .ConfigureServices((hostContext, services) => { ConfigureServices(services); })
                 .UseConsoleLifetime()
-                .ConfigureLogging((hostingContext, logging) => { logging.AddConsole(); })
+                .UseSerilog()
                 .Build();
         }
 
@@ -51,11 +60,6 @@ namespace Example
                     }
                 );
             });
-
-            // when messages will be being consumed
-            // kill rabbitmq node of cluster randomly and start over
-            // after some iterations I get bug
-            collection.AddHostedService<BusRunner>();
 
             // before start create topology like test(exchange)->test(queue)
             // at rabbitmq

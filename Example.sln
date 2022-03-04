@@ -5,6 +5,10 @@ VisualStudioVersion = 16.0.30413.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{B1B1D36D-4A89-4823-9884-CF8DF7E661E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit", "..\..\Code\MassTransit\src\MassTransit\MassTransit.csproj", "{D47D0A52-3AC5-4F10-9BCF-51EBFEA85ECA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MassTransit.RabbitMqTransport", "..\..\Code\MassTransit\src\Transports\MassTransit.RabbitMqTransport\MassTransit.RabbitMqTransport.csproj", "{2FD6912B-8F3D-478B-B9D6-A21A60E25D4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,10 @@ Global
 		{B1B1D36D-4A89-4823-9884-CF8DF7E661E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B1D36D-4A89-4823-9884-CF8DF7E661E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B1D36D-4A89-4823-9884-CF8DF7E661E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D47D0A52-3AC5-4F10-9BCF-51EBFEA85ECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D47D0A52-3AC5-4F10-9BCF-51EBFEA85ECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FD6912B-8F3D-478B-B9D6-A21A60E25D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FD6912B-8F3D-478B-B9D6-A21A60E25D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

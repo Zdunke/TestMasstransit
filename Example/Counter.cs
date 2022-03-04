@@ -1,32 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading;
 
 namespace Example
 {
     public static class Counter
     {
-        private static int _count = 0;
+        static int _publishCount;
+        static int _consumeCount;
 
-        public static int GetCount
+        public static readonly List<int> _counterList = new List<int>();
+
+        public static int GetPublishCount => _publishCount;
+
+        public static int IncrementPublish()
         {
-            get
-            {
-                return (int)_count;
-            }
+            Interlocked.Increment(ref _publishCount);
+            return _publishCount;
         }
 
-        public static int Increment()
+        public static int IncrementConsume()
         {
-            Interlocked.Increment(ref _count);
-            return (int)_count;
+            Interlocked.Increment(ref _consumeCount);
+            return _consumeCount;
         }
 
-        public static int Decrement()
+        public static int DecrementPublish()
         {
-            Interlocked.Decrement(ref _count);
-            return (int)_count;
+            Interlocked.Decrement(ref _publishCount);
+            return _publishCount;
+        }
+
+        public static int DecrementConsume()
+        {
+            Interlocked.Decrement(ref _consumeCount);
+            return _consumeCount;
         }
     }
 }

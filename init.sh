@@ -6,23 +6,13 @@ then
     exit 1
 fi
 
-if [[ "${#@}" == "2" ]] && [[ "$2" == "10" ]]
-then
-    function docker(){
-        docker.exe "$@"
-    }
-    function docker-compose(){
-        docker-compose.exe "$@"
-    }
-fi
-
 DOCKER_ADDRESS=$1
 RABBITMQ1_UI=${DOCKER_ADDRESS}:15673
 RABBITMQ2_UI=${DOCKER_ADDRESS}:15674
 RABBITMQ3_UI=${DOCKER_ADDRESS}:15675
 
 function get_rabbitmq_server_pid(){
-    docker exec $1 /bin/bash -c "ps -ax | grep rabbitmq-server | head -n 1 | awk '{ print \$1 }'"
+    docker exec -it $1 /bin/bash -c "ps -ax | grep rabbitmq-server | head -n 1 | awk '{ print \$1 }'"
 }
 
 function wait_rabbitmq(){
@@ -43,7 +33,7 @@ function cluster_rabbitmq(){
     echo Clustered
 }
 
-docker-compose -p r up -d --force --build
+docker-compose -p r up -d --build
 wait_rabbitmq
 
 cluster_rabbitmq rabbitmq2 rabbitmq1
